@@ -1,5 +1,5 @@
 streamlit
 pandas 
-openai
+openai == 0.27.7
 pydeck
 python-dotenv
