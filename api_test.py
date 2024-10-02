@@ -2,9 +2,13 @@ import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Replace with your own API key
-api_key = "AIzaSyAls6sb4cqqb4MsVKLcQ_ZPYWAxJiR1x5o"
+api_key = os.getenv("GOOGLE_API_KEY")
 
 # Replace with the place ID of the location you want to get reviews for
 place_id = "ChIJoz7pArg3zDERN3oFxvi3mLU"  # Example Place ID for Sydney Opera House
