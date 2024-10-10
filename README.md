@@ -9,7 +9,7 @@ This is a **Streamlit dashboard** that visualizes fuel station data, including l
 - Real-time visualization using **pydeck** for interactive mapping.
 
 ## Screenshots
-![Fuel Station Dashboard](screenshots/dashboard_screenshot.png)
+([screenshots/dashboard_screenshot.png](https://github.com/maercaestro/sentiment-fuel/blob/746c6be1cc52c650a51553c0fb38052d8fc5835c/appscreenshot.png))
 
 ## How to Run the Project Locally
 
