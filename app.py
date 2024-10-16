@@ -62,8 +62,9 @@ with col1:
     selected_station_data = df[df['station_name'] == station].iloc[0]
     selected_2 = df_agg[df_agg['station_name'] == station].iloc[0]
     st.markdown(f"**Station Name**: {selected_2['station_name']}")
-    st.markdown(f"**Average Rating**: {selected_2['rating']:.2f}")
+    st.markdown(f"**Google Ratings**: {selected_2['rating']:.2f}")
     st.markdown(f"**Average Sentiment Score**: {selected_2['Sentiment_Score']:.2f}")
+    st.markdown(f"**Overall Rating Score**: {selected_2['Sentiment_Score']} * {selected_2['rating']}")
     st.text_area("Customer Reviews", selected_station_data['text'], height=150)
 
     # Button to call GPT-3.5 for a recommendation
