@@ -123,7 +123,7 @@ with col1:
         st.subheader(f"GPT-3.5 Recommendation for {selected_2['station_name']}")
         st.write(recommendation)
         new_sentiment = selected_2['sentiment_score'] + 1
-        
+
         
 
 with col2:
@@ -132,8 +132,8 @@ with col2:
     
     # Set the initial view state of the map to the selected station
     view_state = pdk.ViewState(
-        latitude=selected_station_data['latitude'],
-        longitude=selected_station_data['longitude'],
+        latitude=selected_station_data['Latitude'],
+        longitude=selected_station_data['Longitude'],
         zoom=10,
         pitch=0
     )
@@ -142,7 +142,7 @@ with col2:
     layer = pdk.Layer(
         "ScatterplotLayer",
         data=df[df['station_name'] == station],
-        get_position='[longitude, latitude]',
+        get_position='[Longitude, Latitude]',
         get_color='[200, 30, 0, 160]',
         get_radius=200,
         pickable=True
