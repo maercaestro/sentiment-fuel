@@ -122,7 +122,7 @@ with col1:
         # Display the recommendation
         st.subheader(f"GPT-3.5 Recommendation for {selected_2['station_name']}")
         st.write(recommendation)
-        new_sentiment = selected_2['sentiment_score'] + 1
+    
 
         
 
@@ -186,4 +186,4 @@ with tabs[0]:
 
 with tabs[1]:
     st.write("### Sentiment Analysis Summary")
-    st.write(f"Sentiment Score Analysis for {selected_2['station_name']}: {overall_score:.2f}. This indicates a ({score_remarks}) sentiment")
+    st.write(f"Sentiment Score Analysis for {selected_2['station_name']} staion is : {overall_score:.2f}. This indicates a ({score_remarks}) sentiment")
