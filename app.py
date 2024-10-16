@@ -142,7 +142,7 @@ with col2:
             data=population_year_df,
             get_position='[Longitude, Latitude]',
             get_weight='projected_population',
-            radius_pixels=500,
+            radius_pixels=300,
             opacity=0.9,
             aggregation='MEAN'
         )
@@ -160,7 +160,7 @@ with col2:
     st.pydeck_chart(r)
 
 # Additional layout improvements
-tabs = st.tabs(["Data Overview", "Sentiment Analysis"])
+tabs = st.tabs(["Data Overview", "Sentiment Analysis"   ])
 
 with tabs[0]:
     st.write("### Data Overview")
