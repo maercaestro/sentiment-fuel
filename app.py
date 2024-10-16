@@ -35,6 +35,7 @@ df_agg = df.groupby('station_name').agg({
     'text': lambda x: ' '.join(x)  # Combine all reviews into a single string
 }).reset_index()
 
+
 # Set up Streamlit layout
 image2 = Image.open('logoBINAM.png')
 
@@ -64,7 +65,8 @@ with col1:
     st.markdown(f"**Station Name**: {selected_2['station_name']}")
     st.markdown(f"**Google Ratings**: {selected_2['rating']:.2f}")
     st.markdown(f"**Average Sentiment Score**: {selected_2['Sentiment_Score']:.2f}")
-    st.markdown(f"**Overall Rating Score**: {selected_2['Sentiment_Score']} * {selected_2['rating']}")
+    overall_score = selected_2['Sentiment_Score'] * selected_2['rating']
+    st.markdown(f"**Overall Rating Score**: {overall_score}")
     st.text_area("Customer Reviews", selected_station_data['text'], height=150)
 
     # Button to call GPT-3.5 for a recommendation
