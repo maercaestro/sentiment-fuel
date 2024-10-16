@@ -36,15 +36,12 @@ df_agg = df.groupby('station_name').agg({
 }).reset_index()
 
 # Set up Streamlit layout
-
-# Load the image
-image = Image.open('logopetronas.png')
 image2 = Image.open('logoBINAM.png')
 
 # Resize the image
 scale_factor = 0.15  # 15% of the original size
-new_width = int(image.width * scale_factor)
-new_height = int(image.height * scale_factor)
+new_width = int(image2.width * scale_factor)
+new_height = int(image2.height * scale_factor)
 resized_image = image2.resize((new_width, new_height))
 
 st.set_page_config(layout="wide", page_title="Fuel Station Insights Dashboard")
