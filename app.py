@@ -29,6 +29,7 @@ df_agg = df.groupby('station_name').agg({
 }).reset_index()
 
 # Set up Streamlit layout
+<<<<<<< Updated upstream
 
 # Load the image
 image = Image.open('logopetronas.png')
@@ -48,12 +49,21 @@ st.set_page_config(layout="wide", page_title="Fuel Station Insights Dashboard")
 
 st.image(resized_image)
 st.title("Fuel Station Insights Dashboard from BINAM-4")
-
+=======
+st.set_page_config(layout="wide", page_title="Fuel Station Insights Dashboard")
+st.title("Fuel Station Insights Dashboard")
+>>>>>>> Stashed changes
 
 # Split page into columns for better layout
 col1, col2 = st.columns([2, 3])
 
+<<<<<<< Updated upstream
+# Split page into columns for better layout
+col1, col2 = st.columns([2, 3])
 
+
+=======
+>>>>>>> Stashed changes
 with col1:
     # Dropdown to select a station
     st.subheader("Station Overview")
@@ -65,7 +75,12 @@ with col1:
     st.markdown(f"**Station Name**: {selected_2['station_name']}")
     st.markdown(f"**Average Rating**: {selected_2['rating']:.2f}")
     st.markdown(f"**Average Sentiment Score**: {selected_2['Sentiment_Score']:.2f}")
+<<<<<<< Updated upstream
     st.text_area("Customer Reviews", selected_station_data['text'], height=150)
+=======
+    st.markdown(f"**Customer Reviews**:")
+    st.text_area("", selected_2['text'], height=150)
+>>>>>>> Stashed changes
 
     # Button to call GPT-3.5 for a recommendation
     if st.button('Get GPT-3.5 Business Recommendation'):
@@ -151,4 +166,8 @@ with tabs[1]:
 
 with tabs[2]:
     st.write("### Business Recommendations")
+<<<<<<< Updated upstream
     st.write("Use the button on the left to get specific recommendations for each station.")
+=======
+    st.write("Use the button on the left to get specific recommendations for each station.")
+>>>>>>> Stashed changes
