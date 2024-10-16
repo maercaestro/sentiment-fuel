@@ -24,6 +24,11 @@ population_df['Longitude'] = population_df['Longitude'].round(2)
 df['text'] = df['text'].fillna('')
 df['text'] = df['text'].astype(str)
 
+df['overall_score'] = (0.8* df['rating']) + (0.2* df['sentiment_score'])
+df['sales'] = df['overall_score'] * df['projected_population'] * 40 * 54 * 0.6
+df['new_score'] = (0.8*df['rating']) + (0.2 * (df['sentiment_score']+1))
+df['new_sales'] = df['new_score'] * df['projected_population'] * 40 * 54 * 0.6
+
 # Group the data by 'Station Name', and aggregate
 df_agg = df.groupby('station_name').agg({
     'rating': 'mean',  # Average rating
@@ -122,6 +127,8 @@ with col1:
         # Display the recommendation
         st.subheader(f"GPT-3.5 Recommendation for {selected_2['station_name']}")
         st.write(recommendation)
+        st.write(f"Doing this will increase your potential sales from RM {selected_station_data['sales']} to RM {selected_2['new_sales']} ")
+       
     
 
         
