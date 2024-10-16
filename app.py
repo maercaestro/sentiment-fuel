@@ -24,9 +24,9 @@ population_df['Longitude'] = population_df['Longitude'].round(2)
 df['text'] = df['text'].fillna('')
 df['text'] = df['text'].astype(str)
 
-df['overall_score'] = (0.8* df['rating']) + (0.2* df['sentiment_score'])
+df['overall_score'] = (0.8* df['rating']) + (0.2* df['Sentiment_Score'])
 df['sales'] = df['overall_score'] * df['projected_population'] * 40 * 54 * 0.6
-df['new_score'] = (0.8*df['rating']) + (0.2 * (df['sentiment_score']+1))
+df['new_score'] = (0.8*df['rating']) + (0.2 * (df['Sentiment_Score']+1))
 df['new_sales'] = df['new_score'] * df['projected_population'] * 40 * 54 * 0.6
 
 # Group the data by 'Station Name', and aggregate
