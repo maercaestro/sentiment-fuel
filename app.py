@@ -65,8 +65,8 @@ with col1:
     st.markdown(f"**Station Name**: {selected_2['station_name']}")
     st.markdown(f"**Google Ratings**: {selected_2['rating']:.2f}")
     st.markdown(f"**Average Sentiment Score**: {selected_2['Sentiment_Score']:.2f}")
-    overall_score = selected_2['Sentiment_Score'] * selected_2['rating']
-    st.markdown(f"**Overall Rating Score**: {overall_score}")
+    overall_score = (0.8 *selected_2['Sentiment_Score']) +  ( 0.2 * selected_2['rating'])
+    st.markdown(f"**Overall Rating Score**: {overall_score:.2f}")
     st.text_area("Customer Reviews", selected_station_data['text'], height=150)
 
     # Button to call GPT-3.5 for a recommendation
