@@ -160,7 +160,7 @@ with col2:
     st.pydeck_chart(r)
 
 # Additional layout improvements
-tabs = st.tabs(["Data Overview", "Sentiment Analysis", "Business Recommendations"])
+tabs = st.tabs(["Data Overview", "Sentiment Analysis"])
 
 with tabs[0]:
     st.write("### Data Overview")
