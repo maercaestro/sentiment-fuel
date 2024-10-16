@@ -180,5 +180,4 @@ with tabs[0]:
 
 with tabs[1]:
     st.write("### Sentiment Analysis Summary")
-    avg_sentiment = (0.2*df_agg['Sentiment_Score'].mean()) *(0.8*df_agg['rating'].mean())
-    st.write(f"Average Sentiment Score across all stations: {avg_sentiment:.2f}")
+    st.write(f"Sentiment Score Analysis for {selected_2['station_name']}: {overall_score:.2f}. This indicates a ({score_remarks}) sentiment")
