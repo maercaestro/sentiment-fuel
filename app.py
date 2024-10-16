@@ -127,7 +127,7 @@ with col1:
         # Display the recommendation
         st.subheader(f"GPT-3.5 Recommendation for {selected_2['station_name']}")
         st.write(recommendation)
-        st.write(f"Doing this will increase your potential sales from by  RM ({selected_station_data['new_sales']-selected_station_data['sales']})")
+        st.write(f"Doing this will increase your potential sales from by  RM {selected_station_data['new_sales']-selected_station_data['sales']}")
        
     
 
