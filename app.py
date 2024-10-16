@@ -11,7 +11,7 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Load the dataset
-df = pd.read_csv('sentiment_results.csv')
+df = pd.read_csv('final_dataset3.csv')
 
 # Load the population forecast dataset
 population_df = pd.read_csv('new_projected.csv')
@@ -20,10 +20,6 @@ population_df = pd.read_csv('new_projected.csv')
 population_df['Latitude'] = population_df['Latitude'].round(2)
 population_df['Longitude'] = population_df['Longitude'].round(2)
 
-# Split 'Location' column into 'Latitude' and 'Longitude'
-df[['latitude', 'longitude']] = df['location'].str.split(',', expand=True)
-df['latitude'] = pd.to_numeric(df['latitude'])
-df['longitude'] = pd.to_numeric(df['longitude'])
 
 df['text'] = df['text'].fillna('')
 df['text'] = df['text'].astype(str)
@@ -46,6 +42,13 @@ def score_description(score):
         return 'positive'
     else:
         return 'very positive'
+    
+# Sales increase estimation based on rating and population
+def estimate_sales_increase(rating, population):
+    # Rating of 5 corresponds to a 60% multiplier, rating of 0 corresponds to 0% multiplier
+    multiplier = (rating / 5) * 0.6
+    estimated_sales = population * multiplier * 40  # Each population spends RM 40 per week
+    return estimated_sales
 
 # Set up Streamlit layout
 image2 = Image.open('logoBINAM.png')
@@ -119,6 +122,9 @@ with col1:
         # Display the recommendation
         st.subheader(f"GPT-3.5 Recommendation for {selected_2['station_name']}")
         st.write(recommendation)
+        new_sentiment = selected_2['sentiment_score'] + 1
+        
+        
 
 with col2:
     # Use pydeck to create an interactive map that focuses on the selected station
