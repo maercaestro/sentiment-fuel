@@ -35,6 +35,7 @@ df_agg = df.groupby('station_name').agg({
     'text': lambda x: ' '.join(x)  # Combine all reviews into a single string
 }).reset_index()
 
+# Set up Streamlit layout
 
 # Load the image
 image = Image.open('logopetronas.png')
@@ -52,16 +53,8 @@ st.set_page_config(layout="wide", page_title="Fuel Station Insights Dashboard")
 st.image(resized_image)
 st.title("Fuel Station Insights Dashboard from BINAM-4")
 
-st.set_page_config(layout="wide", page_title="Fuel Station Insights Dashboard")
-st.title("Fuel Station Insights Dashboard")
-
 # Split page into columns for better layout
 col1, col2 = st.columns([2, 3])
-
-
-# Split page into columns for better layout
-col1, col2 = st.columns([2, 3])
-
 
 with col1:
     # Dropdown to select a station
@@ -177,5 +170,3 @@ with tabs[1]:
     st.write("### Sentiment Analysis Summary")
     avg_sentiment = df_agg['Sentiment_Score'].mean()
     st.write(f"Average Sentiment Score across all stations: {avg_sentiment:.2f}")
-
-
