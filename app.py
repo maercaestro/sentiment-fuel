@@ -49,7 +49,7 @@ df_agg2['sales'] = ((df_agg2['overall_score'] * df_agg2['projected_population'] 
 df_agg2['new_score'] = (0.8*df_agg2['rating']) + (0.2 * (df_agg2['Sentiment_Score']+1))
 df_agg2['new_sales'] = ((df_agg2['new_score'] * df_agg2['projected_population'] * 20 * 54 * 0.4)/1000).round(2)
 
-overall_sales_increase = (df_agg2['new_sales'].sum() - df_agg2['sales'].sum()).round(2)
+overall_sales_increase = (df_agg2['new_sales'].sum() - df_agg2['sales'].sum())
 
 def score_description(score):
     if score < 1:
@@ -216,4 +216,5 @@ with tabs[1]:
 
 with tabs[2]:
     st.write("### Sales Overview")
+    st.write(f"## Potential sales increase for all station is RM {overall_sales_increase:.2f}")
     st.write(df_agg2)
