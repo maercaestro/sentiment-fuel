@@ -34,15 +34,6 @@ df['text'] = df['text'].fillna('')
 df['text'] = df['text'].astype(str)
 
 #3. prepare the sales dataset based on population forecast
-"""
-Some assumptions are made here to get the sales value for each station. Since each station
-are paired to district, and we have the population data of the district we can estimate the
-sales of each station based on their rating. The assumptions that established are:
-1. At maximum each station will be able to get nearly 40% of the population
-2. This maximum value will be multiplied with the rating of each station
-3. Each costumers will spend at least RM 20 per week at this station
-
-"""
 df['overall_score'] = (0.8* df['rating']) + (0.2* df['Sentiment_Score'])
 df['sales'] = ((df['overall_score'] * df['projected_population'] * 20 * 54 * 0.4)).round(2)
 df['new_score'] = (0.8*df['rating']) + (0.2 * (df['Sentiment_Score']+1))
