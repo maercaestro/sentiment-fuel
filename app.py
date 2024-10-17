@@ -33,11 +33,6 @@ population_df['Longitude'] = population_df['Longitude'].round(2)
 df['text'] = df['text'].fillna('')
 df['text'] = df['text'].astype(str)
 
-#3. prepare the sales dataset based on population forecast
-df['overall_score'] = (0.8* df['rating']) + (0.2* df['Sentiment_Score'])
-df['sales'] = ((df['overall_score'] * df['projected_population'] * 20 * 54 * 0.4)/100).round(2)
-df['new_score'] = (0.8*df['rating']) + (0.2 * (df['Sentiment_Score']+1))
-df['new_sales'] = ((df['new_score'] * df['projected_population'] * 20 * 54 * 0.4)/100).round(2)
 
 # Group the data by 'Station Name', and aggregate
 df_agg = df.groupby('station_name').agg({
@@ -45,6 +40,15 @@ df_agg = df.groupby('station_name').agg({
     'Sentiment_Score': 'mean',  # Average sentiment score
     'text': lambda x: ' '.join(x)  # Combine all reviews into a single string
 }).reset_index()
+
+df_agg2 = df_agg
+
+df_agg2['overall_score'] = (0.8* df_agg2['rating']) + (0.2* df_agg2['Sentiment_Score'])
+df_agg2['sales'] = ((df_agg2['overall_score'] * df_agg2['projected_population'] * 20 * 54 * 0.4)/1000).round(2)
+df_agg2['new_score'] = (0.8*df_agg2['rating']) + (0.2 * (df_agg2['Sentiment_Score']+1))
+df_agg2['new_sales'] = ((df_agg2['new_score'] * df_agg2['projected_population'] * 20 * 54 * 0.4)/1000).round(2)
+
+overall_sales_increase = (df_agg2['new_sales'].sum() - df_agg2['sales'].sum()).round(2)
 
 def score_description(score):
     if score < 1:
@@ -211,4 +215,4 @@ with tabs[1]:
 
 with tabs[2]:
     st.write("### Sales Overview")
-    st.write(df)
+    st.write(df_agg2)
