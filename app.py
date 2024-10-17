@@ -188,7 +188,7 @@ with col2:
     st.markdown(f"**Increase in sales by {percentage} %**")
 
 # Additional layout improvements
-tabs = st.tabs(["Data Overview", "Sentiment Analysis"   ])
+tabs = st.tabs(["Data Overview", "Sentiment Analysis", "Sales Analysis"   ])
 
 with tabs[0]:
     st.write("### Data Overview")
