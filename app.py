@@ -1,3 +1,30 @@
+"""
+MIT License
+
+Copyright (c) 2024 Abu Huzaifah Bin Haji Bidin
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+"""
+
+#load the library
 import streamlit as st
 import pandas as pd
 import openai
@@ -6,28 +33,38 @@ import os
 from dotenv import load_dotenv
 from PIL import Image
 
-# Load environment variables from a .env file (optional, if you use one)
+#load environment variable to load the OpenAPI key
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Load the dataset
-df = pd.read_csv('final_dataset3.csv')
+# load all the dataset
+df = pd.read_csv('final_dataset3.csv') #for sentiment analysis
+population_df = pd.read_csv('new_projected.csv') #for district population
 
-# Load the population forecast dataset
-population_df = pd.read_csv('new_projected.csv')
-
-# Reduce the coordinates to 2 decimal points to increase broadability
+# clean and prepare the dataset
+#1. round up
 population_df['Latitude'] = population_df['Latitude'].round(2)
 population_df['Longitude'] = population_df['Longitude'].round(2)
 
 
+#2. clean the string and review text
 df['text'] = df['text'].fillna('')
 df['text'] = df['text'].astype(str)
 
+#3. prepare the sales dataset based on population forecast
+"""
+Some assumptions are made here to get the sales value for each station. Since each station
+are paired to district, and we have the population data of the district we can estimate the
+sales of each station based on their rating. The assumptions that established are:
+1. At maximum each station will be able to get nearly 40% of the population
+2. This maximum value will be multiplied with the rating of each station
+3. Each costumers will spend at least RM 20 per week at this station
+
+"""
 df['overall_score'] = (0.8* df['rating']) + (0.2* df['Sentiment_Score'])
-df['sales'] = ((df['overall_score'] * df['projected_population'] * 40 * 54 * 0.6)/1000).round(2)
+df['sales'] = ((df['overall_score'] * df['projected_population'] * 20 * 54 * 0.4)).round(2)
 df['new_score'] = (0.8*df['rating']) + (0.2 * (df['Sentiment_Score']+1))
-df['new_sales'] = ((df['new_score'] * df['projected_population'] * 40 * 54 * 0.6)/1000).round(2)
+df['new_sales'] = ((df['new_score'] * df['projected_population'] * 20 * 54 * 0.4)).round(2)
 
 # Group the data by 'Station Name', and aggregate
 df_agg = df.groupby('station_name').agg({
@@ -199,5 +236,5 @@ with tabs[1]:
     st.write(f"Sentiment Score Analysis for {selected_2['station_name']} staion is : {overall_score:.2f}. This indicates a ({score_remarks}) sentiment")
 
 with tabs[2]:
-    st.write("###Sales increase summary")
+    st.write("### Sales Overview")
     st.write(df)
