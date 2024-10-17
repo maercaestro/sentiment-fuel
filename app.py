@@ -37,7 +37,8 @@ df['text'] = df['text'].astype(str)
 # Group the data by 'Station Name', and aggregate
 df_agg = df.groupby('station_name').agg({
     'rating': 'mean',  # Average rating
-    'Sentiment_Score': 'mean',  # Average sentiment score
+    'Sentiment_Score': 'mean', 
+     'projected_population' : 'mean', # Average sentiment score
     'text': lambda x: ' '.join(x)  # Combine all reviews into a single string
 }).reset_index()
 
