@@ -85,7 +85,8 @@ with col1:
     st.markdown(f"**Google Ratings**: {selected_2['rating']:.2f}")
     st.markdown(f"**Average Sentiment Score**: {selected_2['Sentiment_Score']:.2f}")
     overall_score = (0.2 *selected_2['Sentiment_Score']) +  ( 0.8 * selected_2['rating'])
-    sales_increase = selected_station_data['new_sales'] - selected_station_data['sales']
+    sales_increase = (selected_station_data['new_sales'] - selected_station_data['sales']).round(2)
+    percentage = (((selected_station_data['new_sales']- selected_station_data['sales'])/ (selected_station_data['new_sales']))*100).round(2)
     score_remarks = score_description(overall_score)
     st.markdown(f"**Overall Rating Score**: {overall_score:.2f} ({score_remarks})")
     st.text_area("Customer Reviews", selected_station_data['text'], height=150)
@@ -184,6 +185,7 @@ with col2:
     )
 
     st.pydeck_chart(r)
+    st.markdown(f"**Increase in sales by {percentage} %**")
 
 # Additional layout improvements
 tabs = st.tabs(["Data Overview", "Sentiment Analysis"   ])
