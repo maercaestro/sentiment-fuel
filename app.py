@@ -197,3 +197,7 @@ with tabs[0]:
 with tabs[1]:
     st.write("### Sentiment Analysis Summary")
     st.write(f"Sentiment Score Analysis for {selected_2['station_name']} staion is : {overall_score:.2f}. This indicates a ({score_remarks}) sentiment")
+
+with tabs[2]:
+    st.write("###Sales increase summary")
+    st.write(df)
